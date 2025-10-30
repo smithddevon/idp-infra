@@ -44,7 +44,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
 # Artifact Registry
 
-resource "google_artifact_registry_repository" "idp_repo" {
+resource "google_artifact_registry_repository" "idp_images" {
   provider      = google
   location      = var.region
   repository_id = "idp-artifacts"
