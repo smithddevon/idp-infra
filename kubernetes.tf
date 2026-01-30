@@ -1,6 +1,6 @@
 data "google_client_config" "default" {}
 
-data "google_container_cluster" "existing_cluster" {
+data "google_container_cluster" "primary" {
   name     = google_container_cluster.primary.name
   location = var.region
 }
@@ -15,7 +15,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     host  = data.google_container_cluster.primary.endpoint
     token = data.google_client_config.default.access_token
 

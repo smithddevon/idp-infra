@@ -57,7 +57,7 @@ resource "google_artifact_registry_repository" "idp_images" {
 resource "google_secret_manager_secret" "idp_secret" {
   secret_id = "idp-secret"
   replication {
-    automatic = true
+    auto {}
   }
 }
 
