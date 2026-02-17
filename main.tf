@@ -24,6 +24,8 @@ resource "google_container_cluster" "primary" {
     remove_default_node_pool = true
     initial_node_count       = 1
 
+    node_locations = ["us-central1-a"]
+
     deletion_protection = false
 }
 
@@ -38,8 +40,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
     node_config {
         machine_type = "e2-medium"
-        disk_type    
-        = "pd-standard"
+        disk_type    = "pd-standard"
         disk_size_gb = 30
         oauth_scopes = [
                  "https://www.googleapis.com/auth/cloud-platform",
