@@ -1,3 +1,5 @@
+# Terraform provider info set to prevent updated versioning issues 
+
 terraform {
     required_version = "~> 1.8.0"
 

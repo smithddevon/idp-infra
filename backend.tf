@@ -1,3 +1,5 @@
+# Terraform backend stores statefiles remotely in GCS
+
 terraform {
   backend "gcs" {
     bucket  = "idp-tf-state-bucket"   # Replace with your actual bucket name

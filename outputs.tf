@@ -1,3 +1,5 @@
+# Terraform outputs that display key values after deployment 
+
 output "cluster_name" {
     value = google_container_cluster.primary.name
 }

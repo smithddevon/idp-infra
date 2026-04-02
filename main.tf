@@ -1,4 +1,4 @@
-# Networking (VPC + Subnet)
+# Networking (VPC + Subnet) - networking isolation for GKE cluster
 
 resource "google_compute_network" "vpc_network" {
     name                    = "idp-vpc"
@@ -12,7 +12,7 @@ resource "google_compute_subnetwork" "subnet" {
     network       = google_compute_network.vpc_network.id
 }
 
-# GKE Cluster
+# GKE Cluster - Kubernetes cluster for running workloads
 
 resource "google_container_cluster" "primary" {
     name     = "idp-gke-cluster"
@@ -29,7 +29,7 @@ resource "google_container_cluster" "primary" {
     deletion_protection = false
 }
 
-# GKE Node Pool
+# GKE Node Pool - worker nodes that run app containers
 
 resource "google_container_node_pool" "primary_nodes" {
     name     = "idp-node-pool"
@@ -48,7 +48,7 @@ resource "google_container_node_pool" "primary_nodes" {
     }
 }
 
-# Artifact Registry
+# Artifact Registry - stores Docker images pushed by CI/CD pipeline
 
 resource "google_artifact_registry_repository" "idp_images" {
   provider      = google
@@ -58,7 +58,7 @@ resource "google_artifact_registry_repository" "idp_images" {
   format        = "DOCKER"
 }
 
-# Secret Manager
+# Secret Manager - stores app secrets
 
 resource "google_secret_manager_secret" "idp_secret" {
   secret_id = "idp-secret"
@@ -67,7 +67,7 @@ resource "google_secret_manager_secret" "idp_secret" {
   }
 }
 
-# IAM service account and roles
+# IAM service account and roles - used for CI/CD (WIF) and application access to GCP resources
 
 resource "google_service_account" "idp_sa" {
   account_id   = "idp-service-account"
